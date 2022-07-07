@@ -4,10 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Redux Begin
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
+// Redux End
+
+const store = createStore(reducers, applyMiddleware(thunk, logger));
+
+const ReduxApp = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ReduxApp />
   </React.StrictMode>
 );
 
